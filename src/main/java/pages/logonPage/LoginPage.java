@@ -17,7 +17,7 @@ public class LoginPage extends BasePage {
     @FindBy(css = "[placeholder='Password']") // input password field
     private WebElement password;
 
-    @FindBy(css = ".mx-button.login.no-selectasdasd") // login button
+    @FindBy(css = ".mx-button.login.no-select") // login button
     private WebElement login_button;
 
     @FindBy(css = ".icon.New_login_logo") // logo text
@@ -34,7 +34,7 @@ public class LoginPage extends BasePage {
 
 
     public void click_loginButton () {
-        click(login_button);
+        a_click(login_button);
     }
 
 
