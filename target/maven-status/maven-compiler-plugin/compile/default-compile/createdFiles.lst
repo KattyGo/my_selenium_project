@@ -1,0 +1,6 @@
+base\BasePage.class
+base\BaseTest.class
+DriverFactory\MobileDriver.class
+pages\mainPage\DashboardPage.class
+pages\logonPage\LoginPage.class
+DriverFactory\BrowserFactory.class
