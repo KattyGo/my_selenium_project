@@ -12,8 +12,21 @@ public class DashboardPage extends BasePage {
 
     @FindBy(css = ".main-menu-btn-label")
     private WebElement next_tab;
+    @FindBy(xpath = "//span[contains(text(),'Beresheet hotel')]")
+    private WebElement scroll_sample;
 
-    public boolean is_displayTab(){
-        return next_tab.isDisplayed();
+    public WebElement getScroll_sample() {
+        return scroll_sample;
     }
+
+    public String is_displayTab()  {
+        return getText(next_tab);
+    }
+
+    public void scroll_sample(){
+        scrollToElement(scroll_sample);
+    }
+
+
+
 }

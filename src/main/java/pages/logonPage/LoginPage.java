@@ -42,17 +42,15 @@ public class LoginPage extends BasePage {
 
 
     public void type_userName (String text) {
-        userName.clear();
-        userName.sendKeys(text);
+       type(userName,text);
     }
 
     public void type_password (String pass) {
-        password.clear();
-        password.sendKeys(pass);
+        type(password,pass);
     }
 
-    public String get_logo_text () {
-        return logo.getText();
+    public String get_logo_text ()  {   //починить
+        return getText(logo);
     }
 
 

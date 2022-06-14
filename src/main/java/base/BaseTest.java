@@ -17,9 +17,9 @@ public class BaseTest {
 
 
     @BeforeMethod(alwaysRun = true)
-    @Parameters({"browserName","brows_ver","url"})
-    public void setUp(@Optional("chrome") String browserName,String brows_ver,String url){
-        System.out.println("create browser: "+ browserName+" "+ brows_ver);
+    @Parameters({"browserName","url"})
+    public void setUp(@Optional("chrome") String browserName,String url){
+        System.out.println("create browser: "+ browserName);
         BrowserFactory browserFactory = new BrowserFactory(browserName);
         tdriver.set(browserFactory.createDriver());
         getDriver().get(url);
