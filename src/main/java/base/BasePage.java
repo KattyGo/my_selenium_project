@@ -15,7 +15,7 @@ public class BasePage {
     WebDriverWait wait;
     Actions action;
     WebDriver driver;
-
+    JavascriptExecutor jsExecutor;
 
 
     public BasePage(WebDriver driver ) {
@@ -23,6 +23,7 @@ public class BasePage {
         PageFactory.initElements(new AjaxElementLocatorFactory(driver,1),this);
         wait = new WebDriverWait(driver,10);
         action= new Actions(driver);
+        jsExecutor = (JavascriptExecutor) driver;
     }
 
     protected void js_click(WebElement element){
@@ -32,8 +33,7 @@ public class BasePage {
         for (int i=0; i < 2; i++){ // 2 tries to make click
             try {
                 wait.until(ExpectedConditions.elementToBeClickable(element));
-                JavascriptExecutor executor = (JavascriptExecutor)driver;
-                executor.executeScript("arguments[0].click();", element);
+                jsExecutor.executeScript("arguments[0].click();", element);
                 sleep(200);
 
             }catch (Exception e){
@@ -126,13 +126,17 @@ public class BasePage {
         }
     }
 
-    /** Perform scroll to the bottom */
+    /** Perform scroll to the elemnet */
     protected void scrollToElement(WebElement element){
         System.out.println("Scrolling to the element ");
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        jsExecutor.executeScript("arguments[0].scrollIntoView(true);", element);
 
     }
+
+    /** Perform scroll to the end page */
     protected void scrollEndPage(){
-        ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, document.body.scrollHeight)");
+        jsExecutor.executeScript("window.scrollTo(0, document.body.scrollHeight)");
     }
+
+
 }

@@ -47,7 +47,7 @@
                     <!-- Suite testng xml file to consider for test execution -->
                     <suiteXmlFiles>
                         <!--suppress UnresolvedMavenProperty -->
-<!--                        <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>-->
+                        <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
             </plugin>
