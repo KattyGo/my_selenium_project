@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="katty test" >
+
+    <test name="chrome">
+        <parameter name="browserName" value="chrome"></parameter>
+        <parameter name="url" value="https://portal-qa1.maytronics.co/#/sys/pools/list"></parameter>
+
+        <classes>
+        <class name="WriteDateTest"></class>
+        </classes>
+
+    </test>
+</suite>

@@ -15,8 +15,6 @@ public class LoginTest extends BaseTest {
         System.out.println(loginPage.get_logo_text());
         loginPage.click_loginButton();
         System.out.println( dashboardPage.is_displayTab());
-
-
         dashboardPage.scroll_sample();
         Thread.sleep(5000);
 

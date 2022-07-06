@@ -12,9 +12,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BasePage {
 
-    WebDriverWait wait;
+    public WebDriverWait wait;
     Actions action;
-    WebDriver driver;
+   public WebDriver driver;
     JavascriptExecutor jsExecutor;
 
 

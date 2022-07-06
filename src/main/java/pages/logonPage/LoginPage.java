@@ -4,6 +4,7 @@ import base.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pages.mainPage.DashboardPage;
 
 public class LoginPage extends BasePage {
     public LoginPage(WebDriver driver) {
@@ -33,20 +34,23 @@ public class LoginPage extends BasePage {
     }
 
 
-    public void click_loginButton () {
+    public DashboardPage click_loginButton () {
         a_click(login_button);
+        return new DashboardPage(driver);
     }
 
 
 
 
 
-    public void type_userName (String text) {
+    public LoginPage type_userName (String text) {
        type(userName,text);
+       return this;
     }
 
-    public void type_password (String pass) {
+    public LoginPage type_password (String pass) {
         type(password,pass);
+        return this;
     }
 
     public String get_logo_text ()  {   //починить
