@@ -1,4 +1,7 @@
+package Logins;
+
 import base.BaseTest;
+import io.qameta.allure.Epic;
 import org.testng.annotations.Test;
 import pages.logonPage.LoginPage;
 import pages.mainPage.DashboardPage;
@@ -6,6 +9,7 @@ import pages.mainPage.DashboardPage;
 public class LoginTest extends BaseTest {
 
 
+    @Epic("Logins")
     @Test(testName = "login",description = "просто так")
     public void login_test() throws InterruptedException {
         LoginPage loginPage = new LoginPage(getDriver());  //instace login page

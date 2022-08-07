@@ -1,6 +1,8 @@
 package pages.logonPage;
 
 import base.BasePage;
+import io.qameta.allure.Description;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -34,6 +36,7 @@ public class LoginPage extends BasePage {
     }
 
 
+    @Step("click login button")
     public DashboardPage click_loginButton () {
         a_click(login_button);
         return new DashboardPage(driver);
@@ -43,6 +46,7 @@ public class LoginPage extends BasePage {
 
 
 
+    @Step("Typing user name")
     public LoginPage type_userName (String text) {
        type(userName,text);
        return this;

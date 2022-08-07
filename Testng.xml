@@ -2,12 +2,17 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="katty test" >
 
+    <listeners>
+        <listener class-name="Listener.MyListener"></listener>
+    </listeners>
+
+
     <test name="chrome">
-        <parameter name="browserName" value="firefox"></parameter>
+        <parameter name="browserName" value="chrome"></parameter>
         <parameter name="url" value="https://portal-qa1.maytronics.co/#/sys/pools/list"></parameter>
 
         <classes>
-        <class name="LoginTest"></class>
+        <class name="Logins.LoginTest"></class>
         </classes>
 
     </test>
