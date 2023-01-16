@@ -30,11 +30,13 @@ public class BasePage extends BaseTest{
         wait = new WebDriverWait(driver,10);
         action= new Actions(driver);
         jsExecutor = (JavascriptExecutor) driver;
+
     }
 
     protected void js_click(WebElement element){
         if (element==null) {
            log.info("element is Null");
+
         }
         for (int i=0; i < 2; i++){ // 2 tries to make click
             try {
@@ -51,7 +53,8 @@ public class BasePage extends BaseTest{
     }
 
 
-    protected  void a_click(WebElement element){
+    /* ***click  by navigate with mouse  */
+    protected  boolean a_click(WebElement element){
         log.info("click to element : "+ element);
         if (element==null) {
             log.info("element is Null");
@@ -62,13 +65,15 @@ public class BasePage extends BaseTest{
                 sleep(200);
 
             }catch (Exception e){
-                log.info("Actions click FAILED" +e.getMessage());
+                log.error("Actions click FAILED" +e.getMessage());
             }
             log.info("Actions Click RETRY "+ i+" ---------------------");
         }
+        return false;
     }
 
-    protected void click(WebElement element){
+    /* ***click  regular func and reclick twice   */
+    protected boolean click(WebElement element){
         log.info("click to element : "+ element);
         if (element==null) {
             log.info("element is Null");
@@ -80,25 +85,24 @@ public class BasePage extends BaseTest{
                 sleep(200);
 
             }catch (Exception e){
-                log.info("click FAILED" +e.getMessage());
+                log.warn("click FAILED" +e.getMessage());
             }
-            log.info("Click RETRY "+ i+" ---------------------");
+            log.error("Click RETRY "+ i+" ---------------------");
         }
+        return false;
     }
 
-    protected void  type(WebElement element,String text) {
-        if (element == null) {
-            log.info("element is Null");
+    protected boolean type(WebElement el, String text) {
+        if (el == null)
+            return false;
+        try {
+            el.sendKeys(text);
+            sleep(1000);
+            return true;
+        } catch (Exception e) {
+            log.error("type(): FAILED\n" + e.getMessage());
         }
-            try {
-                wait.until(ExpectedConditions.visibilityOf(element));
-                element.clear();
-                element.sendKeys(text);
-               sleep(200);
-            } catch (Exception e) {
-                log.info("click FAILED" + e.getMessage());
-
-        }
+        return false;
     }
 
     protected String getText(WebElement element)  {
@@ -122,15 +126,15 @@ public class BasePage extends BaseTest{
     }
 
   //*** sleep for 'x' millis  ***//
-    protected void sleep(long millis) {
-        try {
-            Thread.sleep(millis);
-        }  catch (InterruptedException e) {
-            log.info("sleep: FAILED {}" + e.getMessage());
-            Thread.currentThread().interrupt(); /* this line will keep Thread.interrupted() returns true */
-            throw new IllegalStateException ("Invalid sleep!");
-        }
-    }
+  protected void sleep(long millis) {
+      try {
+          Thread.sleep(millis);
+      }  catch (InterruptedException e) {
+          log.error("sleep: FAILED {}" + e.getMessage());
+          Thread.currentThread().interrupt(); /* this line will keep Thread.interrupted() returns true */
+          throw new IllegalStateException ("Invalid sleep!");
+      }
+  }
 
     /** Perform scroll to the elemnet */
     protected void scrollToElement(WebElement element){

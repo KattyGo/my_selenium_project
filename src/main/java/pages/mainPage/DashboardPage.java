@@ -27,7 +27,7 @@ public class DashboardPage extends BasePage {
 
     public NewCustumerPage click_plus_bt(){
         wait.until(ExpectedConditions.visibilityOf(full_service_icon));
-        System.out.println("click plus button");
+        log.info("click plus button");
         click(plus_bt);
         return new NewCustumerPage(driver);
     }

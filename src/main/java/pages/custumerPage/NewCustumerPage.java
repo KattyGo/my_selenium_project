@@ -26,20 +26,20 @@ public class NewCustumerPage extends BasePage {
 
 
     public NewCustumerPage click_new_Customer(){
-        System.out.println("click new customer ");
+        log.info("click new customer ");
         click(new_Customer);
         return this;
     }
     public NewCustumerPage type_today_date(){
         click(c_date);
         String timeStamp = new SimpleDateFormat("ddMMyyyy").format(Calendar.getInstance().getTime());
-        System.out.println("type_date: "+ timeStamp);
+        log.info("type_date: "+ timeStamp);
         type(date,timeStamp);
         return this;
     }
    public NewCustumerPage type_today_date(String f_date){
         click(c_date);
-        System.out.println("type_date: "+ f_date);
+        log.info("type_date: "+ f_date);
         type(date,f_date);
         return this;
     }

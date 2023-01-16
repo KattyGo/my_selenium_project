@@ -1,5 +1,6 @@
 package base;
 
+import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.WebDriver;
 import DriverFactory.BrowserFactory;
 import org.testng.annotations.AfterMethod;
@@ -10,7 +11,7 @@ import org.apache.logging.log4j.Logger;
 
 
 public class BaseTest {
-    public static Logger log;
+    public Logger log = LogManager.getRootLogger() ;
     public static ThreadLocal<WebDriver> tdriver = new ThreadLocal<>();
     public static synchronized WebDriver getDriver() {
         return tdriver.get();
@@ -20,7 +21,7 @@ public class BaseTest {
     @BeforeMethod(alwaysRun = true)
     @Parameters({"browserName","url"})
     public void setUp(@Optional("chrome") String browserName,String url){
-        System.out.println("create browser: "+ browserName);
+        log.info("create browser: "+ browserName);
         BrowserFactory browserFactory = new BrowserFactory(browserName,log);
         tdriver.set(browserFactory.createDriver());
         getDriver().get(url);
@@ -31,10 +32,10 @@ public class BaseTest {
     @AfterMethod(alwaysRun = true)
     public void tearDown(){
         try {
-            System.out.println("close driver");
+            log.info("close driver");
             getDriver().quit();
         } catch (Exception e){
-            System.out.println("Error close driver");
+            log.error("Error close driver");
         }
         }
 
