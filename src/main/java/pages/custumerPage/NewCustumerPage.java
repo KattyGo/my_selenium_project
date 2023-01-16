@@ -1,6 +1,7 @@
 package pages.custumerPage;
 
 import base.BasePage;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,7 +11,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class NewCustumerPage extends BasePage {
-
     public NewCustumerPage(WebDriver driver) {
         super(driver);
     }
@@ -21,6 +21,8 @@ public class NewCustumerPage extends BasePage {
     private WebElement date;
     @FindBy(css = ".datepicker-header .datepick-container")
     private WebElement c_date;
+
+
 
 
     public NewCustumerPage click_new_Customer(){

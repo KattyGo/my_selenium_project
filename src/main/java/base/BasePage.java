@@ -1,5 +1,7 @@
 package base;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -10,17 +12,21 @@ import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class BasePage {
 
+public class BasePage extends BaseTest{
+
+
+   public Logger log = LogManager.getRootLogger() ;
     public WebDriverWait wait;
     Actions action;
    public WebDriver driver;
     JavascriptExecutor jsExecutor;
 
 
-    public BasePage(WebDriver driver ) {
-        this.driver = BaseTest.getDriver();
-        PageFactory.initElements(new AjaxElementLocatorFactory(driver,1),this);
+    public BasePage(WebDriver driver) {
+        this.driver = driver;
+
+        PageFactory.initElements(new AjaxElementLocatorFactory(driver,10),this);
         wait = new WebDriverWait(driver,10);
         action= new Actions(driver);
         jsExecutor = (JavascriptExecutor) driver;
@@ -28,7 +34,7 @@ public class BasePage {
 
     protected void js_click(WebElement element){
         if (element==null) {
-            System.out.println("element is Null");
+           log.info("element is Null");
         }
         for (int i=0; i < 2; i++){ // 2 tries to make click
             try {
@@ -37,18 +43,18 @@ public class BasePage {
                 sleep(200);
 
             }catch (Exception e){
-                System.out.println("js_click FAILED" +e.getMessage());
+                log.warn("js_click FAILED" +e.getMessage());
             }
-            System.out.println("js_Click RETRY "+ i+" ---------------------");
+           log.error("js_Click RETRY "+ i+" ---------------------");
         }
 
     }
 
 
     protected  void a_click(WebElement element){
-        System.out.println("click to element : "+ element);
+        log.info("click to element : "+ element);
         if (element==null) {
-            System.out.println("element is Null");
+            log.info("element is Null");
         }
         for (int i=0; i < 2; i++){ // 2 tries to make click
             try {
@@ -56,16 +62,16 @@ public class BasePage {
                 sleep(200);
 
             }catch (Exception e){
-                System.out.println("Actions click FAILED" +e.getMessage());
+                log.info("Actions click FAILED" +e.getMessage());
             }
-            System.out.println("Actions Click RETRY "+ i+" ---------------------");
+            log.info("Actions Click RETRY "+ i+" ---------------------");
         }
     }
 
     protected void click(WebElement element){
-        System.out.println("click to element : "+ element);
+        log.info("click to element : "+ element);
         if (element==null) {
-            System.out.println("element is Null");
+            log.info("element is Null");
         }
         for (int i=0; i < 2; i++){ // 2 tries to make click
             try {
@@ -74,15 +80,15 @@ public class BasePage {
                 sleep(200);
 
             }catch (Exception e){
-                System.out.println("click FAILED" +e.getMessage());
+                log.info("click FAILED" +e.getMessage());
             }
-            System.out.println("Click RETRY "+ i+" ---------------------");
+            log.info("Click RETRY "+ i+" ---------------------");
         }
     }
 
     protected void  type(WebElement element,String text) {
         if (element == null) {
-            System.out.println("element is Null");
+            log.info("element is Null");
         }
             try {
                 wait.until(ExpectedConditions.visibilityOf(element));
@@ -90,14 +96,14 @@ public class BasePage {
                 element.sendKeys(text);
                sleep(200);
             } catch (Exception e) {
-                System.out.println("click FAILED" + e.getMessage());
+                log.info("click FAILED" + e.getMessage());
 
         }
     }
 
     protected String getText(WebElement element)  {
         if (element == null) {
-            System.out.println("element is Null");
+            log.info("element is Null");
         }
         String text= null;
         int count = 0;
@@ -108,7 +114,7 @@ public class BasePage {
                 succesed= true;
             } catch (StaleElementReferenceException e) {
                 e.toString();
-                System.out.println("Trying to recover from a stale element :" + e.getMessage());
+                log.info("Trying to recover from a stale element :" + e.getMessage());
                 sleep(200);
                 count = count + 1;
             }
@@ -120,7 +126,7 @@ public class BasePage {
         try {
             Thread.sleep(millis);
         }  catch (InterruptedException e) {
-            System.out.println("sleep: FAILED {}" + e.getMessage());
+            log.info("sleep: FAILED {}" + e.getMessage());
             Thread.currentThread().interrupt(); /* this line will keep Thread.interrupted() returns true */
             throw new IllegalStateException ("Invalid sleep!");
         }
@@ -128,7 +134,7 @@ public class BasePage {
 
     /** Perform scroll to the elemnet */
     protected void scrollToElement(WebElement element){
-        System.out.println("Scrolling to the element ");
+        log.info("Scrolling to the element ");
         jsExecutor.executeScript("arguments[0].scrollIntoView(true);", element);
 
     }

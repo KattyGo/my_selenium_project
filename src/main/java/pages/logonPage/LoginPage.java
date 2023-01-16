@@ -1,18 +1,19 @@
 package pages.logonPage;
 
 import base.BasePage;
-import io.qameta.allure.Description;
 import io.qameta.allure.Step;
+
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.mainPage.DashboardPage;
 
 public class LoginPage extends BasePage {
+
     public LoginPage(WebDriver driver) {
         super(driver);
     }
-
 
     @FindBy(css = "[placeholder='Username']") // input username field
     private WebElement userName;
@@ -31,6 +32,7 @@ public class LoginPage extends BasePage {
 
 
 
+
     public String get_error_email_text (){
         return error_email.getText();
     }
@@ -41,10 +43,6 @@ public class LoginPage extends BasePage {
         a_click(login_button);
         return new DashboardPage(driver);
     }
-
-
-
-
 
     @Step("Typing user name")
     public LoginPage type_userName (String text) {

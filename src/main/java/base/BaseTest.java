@@ -6,10 +6,11 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
+import org.apache.logging.log4j.Logger;
 
 
 public class BaseTest {
-    public static WebDriver driver;
+    public static Logger log;
     public static ThreadLocal<WebDriver> tdriver = new ThreadLocal<>();
     public static synchronized WebDriver getDriver() {
         return tdriver.get();
@@ -20,7 +21,7 @@ public class BaseTest {
     @Parameters({"browserName","url"})
     public void setUp(@Optional("chrome") String browserName,String url){
         System.out.println("create browser: "+ browserName);
-        BrowserFactory browserFactory = new BrowserFactory(browserName);
+        BrowserFactory browserFactory = new BrowserFactory(browserName,log);
         tdriver.set(browserFactory.createDriver());
         getDriver().get(url);
 
